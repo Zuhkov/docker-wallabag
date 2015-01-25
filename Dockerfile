@@ -28,6 +28,7 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 # Install locales
 RUN locale-gen cs_CZ.UTF-8
 RUN locale-gen de_DE.UTF-8
+RUN locale-gen en_US.UTF-8
 RUN locale-gen es_ES.UTF-8
 RUN locale-gen fr_FR.UTF-8
 RUN locale-gen it_IT.UTF-8
