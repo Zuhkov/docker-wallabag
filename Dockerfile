@@ -3,21 +3,29 @@
 # See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
 # a list of version numbers.
 FROM phusion/baseimage:0.9.15
-MAINTAINER Bob Maerten <bob.maerten@gmail.com>
+MAINTAINER Zuhkov <zuhkov@gmail.com>
 
 # Set correct environment variables.
 ENV HOME /root
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL C.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
-# Regenerate SSH host keys. baseimage-docker does not contain any, so you
-# have to do that yourself. You may also comment out this instruction; the
-# init system will auto-generate one during boot.
-RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
-
-# Use baseimage-docker's init system.
+# Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
 
+# Configure user nobody to match unRAID's settings
+ RUN \
+ usermod -u 99 nobody && \
+ usermod -g 100 nobody && \
+ usermod -d /home nobody && \
+ chown -R nobody:users /home
+
+# Disable SSH
+RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+
 # Install locales
-ENV DEBIAN_FRONTEND noninteractive
 RUN locale-gen cs_CZ.UTF-8
 RUN locale-gen de_DE.UTF-8
 RUN locale-gen es_ES.UTF-8
