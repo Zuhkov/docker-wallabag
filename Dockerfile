@@ -70,7 +70,6 @@ RUN cd /var/www \
     && cd wallabag \
     && unzip -q /tmp/vendor.zip \
     && cp inc/poche/config.inc.default.php inc/poche/config.inc.php
-    && sed -i "s/'SALT', '.*'/'SALT', '34gAogagAigJaurgbqfdvqQergvqer'/" /var/www/wallabag/inc/poche/config.inc.php
 COPY data/poche.sqlite db/
 
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
