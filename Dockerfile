@@ -75,7 +75,7 @@ COPY data/poche.sqlite db/
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
 
 RUN rm -f /tmp/wallabag-$WALLABAG_VERSION.zip /tmp/vendor.zip
-RUN rm -rf /var/www/wallabag/install
+# RUN rm -rf /var/www/wallabag/install
 
 RUN chown -R www-data:www-data /var/www/wallabag
 RUN chmod 755 -R /var/www/wallabag
