@@ -6,7 +6,7 @@ Dockerfile used to build a wallabag docker image.
 
     ID=$(sudo docker run -p 7070:80 -d zuhkov/docker-wallabag:latest /sbin/my_init)
 
-Then head your browser to http://localhost:7070 and enjoy a fresh wallabag install. When you're finished, just stop the docker container:
+Then head your browser to http://localhost:7070 and enjoy a fresh wallabag install. Login with Username and password `wallabag`. Don't forget to change your password! When you're finished, just stop the docker container:
 
     sudo docker stop $ID
 
