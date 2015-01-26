@@ -87,7 +87,7 @@ COPY nginx-wallabag /etc/nginx/sites-available/default
 
 EXPOSE 80
 
-# VOLUME ["/var/www/wallabag/db"]
+VOLUME ["/var/www/wallabag/db"]
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
