@@ -6,6 +6,6 @@ if [ -f /var/www/wallabag/db/poche.sqlite ]; then
 else
   echo "Creating config from template."
   mv /var/www/wallabag/firstrun/poche.sqlite /var/www/wallabag/db/poche.sqlite
-  chown www-data:www-data /var/www/wallabag/db/poche.sqlite
-  chmod 755 /var/www/wallabag/db/poche.sqlite
+  chown www-data:www-data -R /var/www/wallabag/db
+  chmod 755 -R /var/www/wallabag/db
 fi
