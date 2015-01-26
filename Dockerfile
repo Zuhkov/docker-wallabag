@@ -40,9 +40,11 @@ RUN locale-gen uk_UA.UTF-8
 
 # Install wallabag prereqs
 RUN add-apt-repository ppa:nginx/stable && \
-    apt-get update && \
+    apt-get update -q && \
     apt-get install -y nginx php5-cli php5-common php5-sqlite && \
-      php5-gd php5-curl php5-fpm php5-json php5-tidy wget unzip gettext
+      php5-curl php5-fpm php5-json php5-tidy wget unzip gettext
+RUN apt-get update -q && \
+    apt-get install -y php5-gd
 
 # Configure php-fpm
 RUN echo "cgi.fix_pathinfo = 0" >> /etc/php5/fpm/php.ini
@@ -70,7 +72,7 @@ RUN cd /var/www && \
     cd wallabag && \
     unzip -q /tmp/vendor.zip && \
     cp inc/poche/config.inc.default.php inc/poche/config.inc.php
-COPY data/poche.sqlite db/
+COPY data/poche.sqlite db/poche.sqlite
 
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
 
