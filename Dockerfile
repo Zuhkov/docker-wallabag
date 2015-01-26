@@ -41,7 +41,7 @@ RUN locale-gen uk_UA.UTF-8
 # Install wallabag prereqs
 RUN add-apt-repository ppa:nginx/stable && \
     apt-get update -q && \
-    apt-get install -y nginx php5-cli php5-common php5-sqlite && \
+    apt-get install -y nginx php5-cli php5-common php5-sqlite \
       php5-curl php5-fpm php5-json php5-tidy wget unzip gettext
 RUN apt-get update -q && \
     apt-get install -y php5-gd
