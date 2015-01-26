@@ -6,7 +6,11 @@ Dockerfile used to build a wallabag docker image.
 
     ID=$(sudo docker run -p 7070:80 -d zuhkov/docker-wallabag:latest /sbin/my_init)
 
-Then head your browser to http://localhost:7070 and enjoy a fresh wallabag install. Login with Username and password `wallabag`. Don't forget to change your password! When you're finished, just stop the docker container:
+Then head your browser to http://localhost:7070 and enjoy a fresh wallabag install.
+
+Login with Username and password `wallabag`. Don't forget to change your password!
+
+When you're finished, just stop the docker container:
 
     sudo docker stop $ID
 
@@ -27,14 +31,10 @@ Example:
 
     sudo docker run -p 8080:80 -d --env WALLABAG_SALT=34gAogagAigJaurgbqfdvqQergvqer zuhkov/docker-wallabag:latest /sbin/my_init
 
-### SSH into the container
-
-Please refer to the [Phusion documentation](https://github.com/phusion/baseimage-docker#login) to fetch the insecure-key used by default on the container started by the script.
-
 ## Testing wallabag dev version
 
 The same script enable to "mount" a specific source directory instead of the one from the container.
-Just uncomment le SOURCEPATH line, and set it to the absolut path of the wallabag source directory you want to use.
+Just uncomment the SOURCEPATH line, and set it to the absolute path of the wallabag source directory you want to use.
 
 ## building from Dockerfile
 

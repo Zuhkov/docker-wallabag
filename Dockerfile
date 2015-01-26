@@ -72,9 +72,11 @@ RUN cd /var/www && \
     cd wallabag && \
     unzip -q /tmp/vendor.zip && \
     cp inc/poche/config.inc.default.php inc/poche/config.inc.php
-COPY data/poche.sqlite /var/www/wallabag/db/poche.sqlite
+COPY data/poche.sqlite /var/www/wallabag/firstrun/poche.sqlite
 
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
+COPY firstrun.sh /etc/my_init.d/firstrun.sh
+RUN chmod +x /etc/my_init.d/firstrun.sh
 
 RUN rm -f /tmp/wallabag-$WALLABAG_VERSION.zip /tmp/vendor.zip
 RUN rm -rf /var/www/wallabag/install
