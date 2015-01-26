@@ -39,10 +39,10 @@ RUN locale-gen sl_SI.UTF-8
 RUN locale-gen uk_UA.UTF-8
 
 # Install wallabag prereqs
-RUN add-apt-repository ppa:nginx/stable \
-    && apt-get update \
-    && apt-get install -y nginx php5-cli php5-common php5-sqlite \
-          php5-curl php5-fpm php5-json php5-tidy wget unzip gettext
+RUN add-apt-repository ppa:nginx/stable && \
+    apt-get update && \
+    apt-get install -y nginx php5-cli php5-common php5-sqlite && \
+      php5-gd php5-curl php5-fpm php5-json php5-tidy wget unzip gettext
 
 # Configure php-fpm
 RUN echo "cgi.fix_pathinfo = 0" >> /etc/php5/fpm/php.ini
@@ -64,12 +64,12 @@ ADD https://github.com/wallabag/wallabag/archive/$WALLABAG_VERSION.zip /tmp/wall
 COPY vendor.zip /tmp/vendor.zip
 
 RUN mkdir -p /var/www
-RUN cd /var/www \
-    && unzip -q /tmp/wallabag-$WALLABAG_VERSION.zip \
-    && mv wallabag-$WALLABAG_VERSION wallabag \
-    && cd wallabag \
-    && unzip -q /tmp/vendor.zip \
-    && cp inc/poche/config.inc.default.php inc/poche/config.inc.php
+RUN cd /var/www && \
+    unzip -q /tmp/wallabag-$WALLABAG_VERSION.zip && \
+    mv wallabag-$WALLABAG_VERSION wallabag && \
+    cd wallabag && \
+    unzip -q /tmp/vendor.zip && \
+    cp inc/poche/config.inc.default.php inc/poche/config.inc.php
 COPY data/poche.sqlite db/
 
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
