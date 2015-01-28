@@ -31,7 +31,7 @@ Example:
 
     sudo docker run -p 7070:80 -d --env WALLABAG_SALT=34gAogagAigJaurgbqfdvqQergvqer zuhkov/docker-wallabag:latest /sbin/my_init
 
-NOTE: This option should not be used until
+NOTE: This option should not be used until an update is made to the sqlite database to update the temporary password hash to use the new SALT. Utilizing this option will not allow you to login using the specified username and password above.
 
 ## building from Dockerfile
 
