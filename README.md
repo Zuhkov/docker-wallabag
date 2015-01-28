@@ -2,6 +2,8 @@
 
 Dockerfile used to build a wallabag docker image.
 
+This was forked from bobmaerten/docker-wallabag to eliminate the script for persistance in favor of a volume and to better conform to best practices for unRAID Docker.
+
 ## Usage from index.docker.io
 
     ID=$(sudo docker run -p 7070:80 -d zuhkov/docker-wallabag:latest /sbin/my_init)
@@ -18,23 +20,18 @@ Check the [phusion/baseimage](https://github.com/phusion/baseimage-docker) docum
 
 ## Persistance of the database
 
-The [wallabag-docker](scripts/wallabag-docker) script enable persistance of the database outside of the container.
-Modify the DBPATH variable at will, but keep an absolute path in order to things to work properly.
+Persistance is accomplished with a Volume containing the folder with the sqlite database.
 
-    ./scripts/wallabag-docker
-    Usage: wallabag-docker {start|stop|status}
+    docker run -p 7070:80/tcp -d -v "/where/you/want/to/store/db":"/var/www/wallabag/db" zuhkov/docker-wallabag /sbin/my_init
 
 ## Using ENV variable to pass SALT value in config file
 
 You can specify a `--env WALLABAG_SALT=<insert salt value here>` in the docker run command in order to fix the salt value in the wallabag config file on container startup.
 Example:
 
-    sudo docker run -p 8080:80 -d --env WALLABAG_SALT=34gAogagAigJaurgbqfdvqQergvqer zuhkov/docker-wallabag:latest /sbin/my_init
+    sudo docker run -p 7070:80 -d --env WALLABAG_SALT=34gAogagAigJaurgbqfdvqQergvqer zuhkov/docker-wallabag:latest /sbin/my_init
 
-## Testing wallabag dev version
-
-The same script enable to "mount" a specific source directory instead of the one from the container.
-Just uncomment the SOURCEPATH line, and set it to the absolute path of the wallabag source directory you want to use.
+NOTE: This option should not be used until
 
 ## building from Dockerfile
 

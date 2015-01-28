@@ -59,7 +59,7 @@ RUN mkdir /etc/service/nginx
 COPY nginx.sh /etc/service/nginx/run
 
 # Wallabag version
-ENV WALLABAG_VERSION 1.8.1
+ENV WALLABAG_VERSION 1.8.1b
 
 # Extract wallabag code
 ADD https://github.com/wallabag/wallabag/archive/$WALLABAG_VERSION.zip /tmp/wallabag-$WALLABAG_VERSION.zip
@@ -73,6 +73,7 @@ RUN cd /var/www && \
     unzip -q /tmp/vendor.zip && \
     cp inc/poche/config.inc.default.php inc/poche/config.inc.php
 COPY data/poche.sqlite /var/www/wallabag/firstrun/poche.sqlite
+RUN mv /var/www/wallabag/db/* /var/www/wallabag/firstrun/
 
 COPY 99_change_wallabag_config_salt.sh /etc/my_init.d/99_change_wallabag_config_salt.sh
 COPY firstrun.sh /etc/my_init.d/firstrun.sh
